@@ -1,12 +1,12 @@
-import { useRouter } from 'next/router';
+import Link from "next/link";
 
 export default function Home() {
-//  / const router = useRouter();
+
 
   return (
     <div>
       <h1>Welcome to Next.js</h1>
-      {/* <button onClick={() => router.push('/about')}>Go to About Page</button> */}
+      {["slug1" , "slug2"].map(item => <Link href={`blog/${item}`}>Visit to {item} page</Link>)}
     </div>
   );
 }
