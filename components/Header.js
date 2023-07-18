@@ -1,29 +1,42 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useState } from 'react'
+import Enquire from './Enquire'
 const Header = ({ title }) => {
+    const [enquired, setEnquired] = useState(false)
+    // const [enquiredStatus, setEnquiredStatus] = useState(false)
     const headerValues = ["home", "about us", "residential", "commercial", "joint venture", "media center"]
+
+    const onEnquire = (value) => {
+        setEnquired(value)
+        // setEnquiredStatus(true)
+        // setTimeout(() => {
+        //     setEnquiredStatus(false)
+        // }, 2000)
+    }
+
+
+    console.log({ enquiredStatus })
     return (
         <>
-            <div className='flex-col bg-amber-400'>
-                <div className='group'>
-                    <h1 className='flex-1 text-center capitalize text-3xl text-blue-600  p-2'>Builders</h1>
-                    <div className='absolute invisible left-120 top-30 h-80   bg-white opacity-100 z-50  transition-opacity duration-300 pointer-events-none group-hover:visible'>
-                        <div className='flex-col'>
-                            <h1 className='block bg-green-300'>Enquire now</h1>
-                            <h1>Call  : <span className='text-l text-blue-600'>0434-5789809</span></h1>
-                        </div>
+            <div className=' bg-yellow-600'>
+                <h1 className='header text-m text-green-600 uppercase font-bold text-center text-xl p-1' >Real Estate Builders</h1>
+                <div className='group wrapper'>
+                    <h1 className='header text-m text-blue-600 text-center p-4 font-bold' >Enquire now</h1>
+                    <div className='hidden group-hover:flex  justify-center'>
+                        {!enquired ? <Enquire enquired={enquired} onEnquire={onEnquire} /> : <div className='bg-white'><h1 className='text-green-700 p-4'>Already enquired . Please wait until our team reaches out to you</h1></div>}
+                        {/* {enquiredStatus && <h1>Thanks for reaching out . We will get in touch shortly !</h1>} */}
                     </div>
                 </div>
                 <div className='flex'>
-                    {headerValues.map((item) => {
+                    {headerValues.map((header) => {
                         return (
-                            <span className='flex-1 p-2 capitalize text-l'>{item}</span>
+
+                            <p className='flex-1 capitalize p-2 text-center font-bold'>{header}</p>
+
                         )
                     })}
                 </div>
             </div>
-
-
-
         </>
     )
 }

@@ -1,0 +1,13 @@
+.enquire-container{
+    width: 100%;
+}
+
+.enquire {
+    background-color: red;
+    height: 100%;
+}
+
+.wrapper {
+    width: fit-content;
+    margin: auto;
+}
