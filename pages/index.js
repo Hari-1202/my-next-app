@@ -1,14 +1,13 @@
 import Header from "@/components/Header";
-import SwiperPage from "./Swiper";
-import Projects from "./Projects";
-import OGProjects from "./Projects";
+import SwiperPage from "../components/Swiper";
+import OGProjects from "../components/Projects";
 
 export default function HomePage() {
 
    
   return (
     <div>
-     <Header title = "events"/>
+     <Header/>
      <SwiperPage/>
      <OGProjects/>
     </div>

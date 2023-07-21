@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import Enquire from './Enquire'
-const Header = ({ title }) => {
+import { useRouter } from 'next/router'
+const Header = () => {
     const [enquired, setEnquired] = useState(false)
     const [enquiredStatus, setEnquiredStatus] = useState(false)
     const headerValues = ["home", "about us", "residential", "commercial", "joint venture", "media center"]
-
+    const router = useRouter()
     const onEnquire = (value) => {
         setEnquired(value)
         setEnquiredStatus(true)
@@ -13,6 +14,8 @@ const Header = ({ title }) => {
             setEnquiredStatus(false)
         }, 1000)
     }
+
+    console.log(headerValues[1].split(" ")[0])
     return (
         <div className='fixed w-screen'>
             {console.log("rerendered")}
@@ -29,7 +32,7 @@ const Header = ({ title }) => {
                     {headerValues.map((header) => {
                         return (
 
-                            <p className='flex-1 capitalize p-2 text-center font-bold'>{header}</p>
+                            <p className='flex-1 capitalize p-2 text-center font-bold' onClick={() => router.push(`/routes/${header.split(" ")[0]}`)}>{header}</p>
 
                         )
                     })}

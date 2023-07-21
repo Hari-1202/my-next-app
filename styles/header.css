@@ -51,7 +51,7 @@
   .horizontal-scroll {
     display: flex;
     overflow-x: hidden;
-    margin: 5%;
+    /* margin: 5%; */
     transition: transform 0.5s ease;
   }
   
