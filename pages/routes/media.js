@@ -1,8 +1,11 @@
+import Header from '@/components/Header'
 import React from 'react'
 
 const Media = () => {
   return (
-    <div>Media</div>
+    <div>
+      <Header headerVal = {5}/>
+    </div>
   )
 }
 

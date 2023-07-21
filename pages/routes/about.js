@@ -1,8 +1,11 @@
+import Header from '@/components/Header'
 import React from 'react'
 
 const About = () => {
   return (
-    <div>About</div>
+    <div>
+      <Header headerVal = {1}/>
+    </div>
   )
 }
 

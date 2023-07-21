@@ -1,8 +1,11 @@
+import Header from '@/components/Header'
 import React from 'react'
 
 const Joint = () => {
   return (
-    <div>Joint Venture</div>
+    <div>
+      <Header headerVal = {4}/>
+    </div>
   )
 }
 

@@ -1,15 +1,18 @@
 import Header from "@/components/Header";
 import SwiperPage from "../components/Swiper";
 import OGProjects from "../components/Projects";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function HomePage() {
 
-   
+  const router = useRouter()
+  useEffect(() => {
+    router.push('/routes/home')
+  },[])
   return (
     <div>
-     <Header/>
-     <SwiperPage/>
-     <OGProjects/>
+     
     </div>
   );
 }
