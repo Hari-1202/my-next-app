@@ -11,3 +11,54 @@
     width: fit-content;
     margin: auto;
 }
+
+.alert {
+    margin: auto;
+}
+
+.finder {
+   bottom: 200px;
+   right: 15rem;
+   /* width: 11%; */
+   transform: skew(-15deg);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .image {
+    width: 300px;
+    height: 200px;
+    transition: transform 0.3s;
+  }
+  
+  .rotate {
+    transform: rotate(15deg); /* Adjust the rotation angle as needed */
+  }
+
+  .ogImage {
+    height: 90%;
+  }
+
+  .flex-container {
+    display: flex;
+  }
+  
+  .horizontal-scroll {
+    display: flex;
+    overflow-x: hidden;
+    margin: 5%;
+    transition: transform 0.5s ease;
+  }
+  
+  .item {
+    flex: 0 0 32%; 
+    margin: 10px;
+    background-color: lightgray;
+  }
+
+  

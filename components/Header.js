@@ -11,16 +11,13 @@ const Header = ({ title }) => {
         setEnquiredStatus(true)
         setTimeout(() => {
             setEnquiredStatus(false)
-        }, 10000)
+        }, 1000)
     }
-
-
-    console.log({ enquiredStatus })
     return (
-        <>
+        <div className='fixed w-screen'>
             {console.log("rerendered")}
-            <div className=' bg-yellow-600'>
-                <h1 className='header text-m text-green-600 uppercase font-bold text-center text-xl p-1' >Real Estate Builders</h1>
+            <div className=' bg-yellow-300 relative'>
+                <h1 className='header text-m text-black-600 uppercase font-bold text-center text-xl p-1' >Real Estate Builders</h1>
                 {enquiredStatus && <div className='bg-white w-80 alert' ><h1 className='text-center font-bold p-4 '>Thanks for reaching out . We will get in touch shortly !</h1></div>}
                 <div className='group wrapper'>
                     <h1 className='header text-m text-blue-600 text-center p-4 font-bold' >Enquire now</h1>
@@ -28,7 +25,7 @@ const Header = ({ title }) => {
                         {!enquired ? <Enquire enquired={enquired} onEnquire={onEnquire} /> : <div className='bg-white'><h1 className='text-green-700 p-4'>Already enquired . Please wait until our team reaches out to you</h1></div>}
                     </div>
                 </div>
-                <div className='flex'>
+                <div className='flex border-2 bg-yellow-600'>
                     {headerValues.map((header) => {
                         return (
 
@@ -38,7 +35,7 @@ const Header = ({ title }) => {
                     })}
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
