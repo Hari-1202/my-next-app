@@ -61,4 +61,16 @@
     background-color: lightgray;
   }
 
-  
+  .mobileContainer{
+    margin: auto;
+    width: 30%;
+  }
+
+  .msgConatiner {
+    height: 240px;
+    
+     /* height: 30rem; */
+  }
+.msgConatiner::-webkit-scrollbar {
+   display: none;
+}
