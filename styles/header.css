@@ -1,76 +1,90 @@
-.enquire-container{
-    width: 100%;
+.enquire-container {
+  width: 100%;
 }
 
 .enquire {
-    background-color: red;
-    height: 100%;
+  background-color: red;
+  height: 100%;
 }
 
 .wrapper {
-    width: fit-content;
-    margin: auto;
+  width: fit-content;
+  margin: auto;
 }
 
 .alert {
-    margin: auto;
+  margin: auto;
 }
 
 .finder {
-   bottom: 200px;
-   right: 15rem;
-   /* width: 11%; */
-   transform: skew(-15deg);
+  bottom: 200px;
+  right: 15rem;
+  /* width: 11%; */
+  transform: skew(-15deg);
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .image {
-    width: 300px;
-    height: 200px;
-    transition: transform 0.3s;
-  }
-  
-  .rotate {
-    transform: rotate(15deg); /* Adjust the rotation angle as needed */
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-  .ogImage {
-    height: 90%;
-  }
+.image {
+  width: 300px;
+  height: 200px;
+  transition: transform 0.3s;
+}
 
-  .flex-container {
-    display: flex;
-  }
-  
-  .horizontal-scroll {
-    display: flex;
-    overflow-x: hidden;
-    /* margin: 5%; */
-    transition: transform 0.5s ease;
-  }
-  
-  .item {
-    flex: 0 0 32%; 
-    margin: 10px;
-    background-color: lightgray;
-  }
+.rotate {
+  transform: rotate(15deg);
+  /* Adjust the rotation angle as needed */
+}
 
-  .mobileContainer{
-    margin: auto;
-    width: 30%;
-  }
+.ogImage {
+  height: 90%;
+}
 
-  .msgConatiner {
-    height: 240px;
-    
-     /* height: 30rem; */
-  }
+.flex-container {
+  display: flex;
+}
+
+.horizontal-scroll {
+  display: flex;
+  overflow-x: hidden;
+  /* margin: 5%; */
+  transition: transform 0.5s ease;
+}
+
+.item {
+  flex: 0 0 32%;
+  margin: 10px;
+  background-color: lightgray;
+}
+
+.mobileContainer, .resumeWrapper {
+  margin: auto;
+  width: 30%;
+}
+
+
+
+.msgConatiner {
+  height: 400px;
+  /* height: 30rem; */
+}
+
 .msgConatiner::-webkit-scrollbar {
-   display: none;
+  display: none;
+}
+
+.resumeContainer {
+  height: 400px;
+  margin-bottom: 85px;
+
+  /* height: 30rem; */
+}
+
+.resumeContainer::-webkit-scrollbar {
+  display: none;
 }
