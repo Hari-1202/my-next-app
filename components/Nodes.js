@@ -1,64 +1,59 @@
-import { useState } from "react"
+import React, { useEffect, useState } from 'react'
 
-const Nodes = ({ skillInfo }) => {
+const Nodes = ({ skillInfo: { skillNode: skillSet } }) => {
+    const [skills, setSkills] = useState(skillSet)
+    useEffect(() => {
+        console.log(skills)
+    }, [])
+    const [showingSkills, setShowingSkills] = useState({})
+    const [showingLang, setShowingLang] = useState({})
+    const [showingfw, setShowingfw] = useState({})
 
-    const [skills, setSkills] = useState({
-        frontend: {},
-        backend: {},
-    })
-
-    const onShowSkills = ({ category, list, framework }) => {
-        let object = {}
-        console.log("hey", { category, list, framework }, skillInfo.skillNode[category][list]?.["frameworks"]?.[framework]?.["Direct"], !framework)
-        Object.keys(skillInfo.skillNode[category]).map((skillSection) => {
-            // console.log(skills.hasOwnProperty(category) , skills[category], skills, category)
-            // console.log(skillInfo.skillNode[category][list], list, skillSection);
-            if (skills.hasOwnProperty(category)) {
-                object[category] = {
-                    ...object[category],
-                    [skillSection]: list === skillSection ? (framework !== undefined ? {
-                        direct: skillInfo.skillNode[category][list]["frameworks"]["Direct"],
-                        dependencies  : {
-                            [framework]: skillInfo.skillNode[category][list]?.["frameworks"]?.[framework]?.["Direct"]
-                        }
-                    } : {
-                        direct : skillInfo.skillNode[category][list]["frameworks"]["Direct"]
-                    }) : {}
-                    }
-            } else {
-                object[category] = {
-                    ...object[category], [skillSection]: {}
+    const onClick = ({ category, lang = '', framework = '' }) => {
+        if (lang !== '') {
+            setShowingLang(showingSkills[lang]);
+        } else if (framework !== '') {
+            console.log(showingLang, framework);
+            if (showingLang.hasOwnProperty(framework)) {
+                if (showingLang[framework].hasOwnProperty("frameworks")) {
+                    setShowingfw({ ...showingfw, [framework]: showingLang[framework]["frameworks"] })
+                } else {
+                    setShowingfw({ ...showingfw, [framework]: showingLang[framework] })
                 }
             }
-        })
-         // console.log("obj", object)
-        setSkills({ ...skills, [category]: object[category] })
+        }
+        else {
+            let showingSkills = skills[category]
+            setShowingSkills(showingSkills)
+        }
     }
-    console.log(skills, "Skills")
+    console.log(showingfw)
     return (
         <div>
-            <div>
-                {Object.keys(skills).map((skill) => {
-                    // console.log(skills, skills[skill])
-                    return (
-                        <>
-                            <div onClick={() => onShowSkills({ category: skill })}>{skill}</div>
-                            {Object.keys(skills[skill]) && Object.keys(skills[skill]).map((skillList) => {
-                                console.log('css', skills[skill][skillList]["direct"], skills?.[skill]?.[skillList]?.["dependencies"])
-                                return (
-                                    <>
-                                        <div onClick={() => onShowSkills({ category: skill, list: skillList })}>{skillList}</div>
-                                        {skills[skill][skillList] && skills[skill][skillList]["direct"] && skills[skill][skillList]["direct"].map(framework => <div onClick={() => onShowSkills({ category: skill, list: skillList, framework: framework })}>{framework}</div>)}
-                                        {skills[skill][skillList] && skills[skill][skillList]["dependencies"] && Object.values(skills[skill][skillList]["dependencies"]).map(library => <div onClick={() => onShowSkills({ category: skill, list: skillList, framework:  library[0] || library })}>{library[0] || library}</div>)}
-                                    </>
-                                )
-                            }
-                            )}
-                        </>
-                    )
-                })}
-
-            </div>
+            {Object.keys(skills).map((category) => {
+                return (
+                    <div onClick={() => onClick({ category })}> {category}</div>
+                )
+            })}
+            {Object.keys(showingSkills).length > 0 && Object.keys(showingSkills).map((lang) => {
+                return (
+                    <div onClick={() => onClick({ lang })}> {lang}</div>
+                )
+            })}
+            {Object.keys(showingLang).length > 0 && Object.values(showingLang["frameworks"]).map((framework) => {
+                return (
+                    <div onClick={() => onClick({ framework })}> {framework}</div>
+                )
+            })}
+            {Object.keys(showingfw).length > 0 && Object.values(showingfw).map((frameworks) => {
+                return (
+                    frameworks.map((framework) => {
+                        return (
+                            <div onClick={() => onClick({ framework })}> {framework}</div>
+                        )
+                    })
+                )
+            })}
         </div>
     )
 }

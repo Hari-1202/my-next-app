@@ -53,7 +53,15 @@ const Residential = () => {
           frameworks: ["Tailwind", "AntD"]
         },
         Javascript: {
-          frameworks: ["ReactJS", "NextJS", "Redux"]
+          frameworks: ["ReactJS", "NextJS", "Redux"],
+          Redux: ["ReduxSaga"],
+          ReduxSaga: {
+            frameworks : ["ReduxSaga3"]
+          },
+          ReduxSaga3 : {
+            frameworks : ["ReduxSaga4","ReduxSaga5"]
+          },
+          ReduxSaga4 : ["ReduxSaga6"]
         }
       },
       backend: {
@@ -129,7 +137,7 @@ const Residential = () => {
                   })}
                 </div>}
                 {skillInfo.showSkills && <div className='skills mx-2 my-2'>
-                  <Nodes skillInfo={skillInfo} data={data} />
+                  <Nodes skillInfo={skillInfo} />
                 </div>}
               </div>
             )
