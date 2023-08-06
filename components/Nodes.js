@@ -1,57 +1,64 @@
 import { useState } from "react"
 
 const Nodes = ({ skillInfo }) => {
-    const [sD1, setSD1] = useState({
-        display: false,
-        skills: {},
-        clickedItem : ''
-    })
-    const [sD2, setSD2] = useState({
-        display: false,
-        skills: {},
-        clickedItem: ''
+
+    const [skills, setSkills] = useState({
+        frontend: {},
+        backend: {},
     })
 
-    const onShowSkills = (skillCategory , divisonLevel) => {
-        if(divisonLevel === "sd1") {
-            const subDivision = skillInfo.skillNode[skillCategory]
-            sD1.clickedItem === skillCategory ? setSD1({ ...sD1, display: !sD1.display, skills: subDivision, clickedItem: skillCategory }) : setSD1({ ...sD1, display: true, skills: subDivision, clickedItem: skillCategory })
-            sD2.display && setSD2({...sD2 , display: !sD2.display})
-        } else if (divisonLevel === "sd2") {
-            const subDivision = skillInfo.skillNode[skillCategory]
-            if(Object.keys(sD1.skills).includes(skillCategory)){
-                const subDivision =  sD1.skills[skillCategory]
-                sD2.clickedItem === skillCategory ? setSD2({...sD2, display: !sD2.display, skills: subDivision, clickedItem: skillCategory }) : setSD2({...sD2, display: true, skills: subDivision, clickedItem: skillCategory })
+    const onShowSkills = ({ category, list, framework }) => {
+        let object = {}
+        console.log("hey", { category, list, framework }, skillInfo.skillNode[category][list]?.["frameworks"]?.[framework]?.["Direct"], !framework)
+        Object.keys(skillInfo.skillNode[category]).map((skillSection) => {
+            // console.log(skills.hasOwnProperty(category) , skills[category], skills, category)
+            // console.log(skillInfo.skillNode[category][list], list, skillSection);
+            if (skills.hasOwnProperty(category)) {
+                object[category] = {
+                    ...object[category],
+                    [skillSection]: list === skillSection ? (framework !== undefined ? {
+                        direct: skillInfo.skillNode[category][list]["frameworks"]["Direct"],
+                        dependencies  : {
+                            [framework]: skillInfo.skillNode[category][list]?.["frameworks"]?.[framework]?.["Direct"]
+                        }
+                    } : {
+                        direct : skillInfo.skillNode[category][list]["frameworks"]["Direct"]
+                    }) : {}
+                    }
+            } else {
+                object[category] = {
+                    ...object[category], [skillSection]: {}
+                }
             }
-        }
-       
-        
+        })
+         // console.log("obj", object)
+        setSkills({ ...skills, [category]: object[category] })
     }
-    
-
+    console.log(skills, "Skills")
     return (
         <div>
-            <div className="flex p-3 justify-center">
-                {Object.keys(skillInfo.skillNode).map((skillCategory) => {
+            <div>
+                {Object.keys(skills).map((skill) => {
+                    // console.log(skills, skills[skill])
                     return (
-                        <div className={`${Object.keys(skillInfo.skillNode[skillCategory]).length > 0 ? 'bg-green-400' : 'bg-white'} m-2 flex boder-1 border-black rounded-md p-2`} onClick={() => onShowSkills(skillCategory, "sd1")}>{skillCategory}</div>
+                        <>
+                            <div onClick={() => onShowSkills({ category: skill })}>{skill}</div>
+                            {Object.keys(skills[skill]) && Object.keys(skills[skill]).map((skillList) => {
+                                console.log('css', skills[skill][skillList]["direct"], skills?.[skill]?.[skillList]?.["dependencies"])
+                                return (
+                                    <>
+                                        <div onClick={() => onShowSkills({ category: skill, list: skillList })}>{skillList}</div>
+                                        {skills[skill][skillList] && skills[skill][skillList]["direct"] && skills[skill][skillList]["direct"].map(framework => <div onClick={() => onShowSkills({ category: skill, list: skillList, framework: framework })}>{framework}</div>)}
+                                        {skills[skill][skillList] && skills[skill][skillList]["dependencies"] && Object.values(skills[skill][skillList]["dependencies"]).map(library => <div onClick={() => onShowSkills({ category: skill, list: skillList, framework:  library[0] || library })}>{library[0] || library}</div>)}
+                                    </>
+                                )
+                            }
+                            )}
+                        </>
                     )
                 })}
+
             </div>
-            {sD1.display && <div  className="flex p-3 justify-center">
-                {Object.keys(sD1.skills).map((skills) => {
-                    return (
-                        <div  className={`${Object.keys(sD1.skills[skills]["frameworks"]).length > 0 ? 'bg-yellow-400' : 'bg-white'} m-2 flex boder-1 border-black rounded-md p-2 `} onClick={() => onShowSkills(skills, "sd2")}>{skills}</div>
-                    )
-                })}
-            </div>}
-            {sD2.display && <div  className="flex p-3 justify-center">
-                {Object.values(sD2.skills["frameworks"]).map((skills,index) => {
-                    return (
-                        <div  className="m-2 flex boder-1 border-black rounded-md p-2 bg-white" >{skills}</div>
-                    )
-                })}
-            </div>}
         </div>
     )
 }
