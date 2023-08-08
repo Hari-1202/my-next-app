@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Swiper from 'swiper';
 import Construction1 from '../public/construction-1.jpg'
 import Construction2 from '../public/images/construction-2.jpg'
 import Construction3 from '../public/images/construction-3.jpg'
